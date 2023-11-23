@@ -13,7 +13,14 @@ export async function vistaProducto(){
      * 6-El resultado de la función deberá asignarse al elemento .vistaProducto capturado previamente.
      * 7-Se deberá capturar el elemento html correspondiente al anchor btnComprar y enlazar el evento click a la función registrarCompra.  
     */
-   
+   let d = document;
+   let res;
+   let carrusel = d.querySelector(".carrusel");
+   let seccionProductos = d.querySelector(".seccionProductos");
+   let vistaProducto = d.querySelector(".vistaProducto");
+   carrusel.innerHTML = "";
+   let seccionLogin = d.querySelector("seccionLogin");
+   seccionLogin.innerHTML("");
 }
 
 function htmlVistaProducto(id, nombre, descripcion, precio, imagen) {
@@ -58,5 +65,16 @@ function registrarCompra(){
      *     
      */
     
-    
+    let session = getUsuarioAutenticado();
+    if(!session.autenticado){
+      alert("Antes de comprar debe iniciar sesión")
+      return;
+    }
+    let cantidad = document.getElementById("cantidadProducto").ariaValueMax;
+    let idUsuario = session.idUsuario
+    let emailUsuario = session.email;
+    let nameProducto = document.getElementById("nameProducto");
+    let idProducto = nameProducto.getAttribute("data-...")
+    const fecha = new Date();
+    // ...
 }

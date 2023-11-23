@@ -8,6 +8,18 @@ function htmlCategoria(id, categoria){
     /*Y ADEMAS REEMPLAZAR EL TEXTO Nombre de Categoría POR EL VALOR QUE LLEGA AL PARAMETRO CATEGORIA DE LA FUNCION*/
     /*POR ULTIMO, LA FUNCION DEVOLVERA LA CADENA RESULTANTE*/   
     
+    let cad =
+    `
+    <div class="categorias" data-idCategoria="${id}">
+      <h1 class="categoria">${categoria}</h1>
+      <div class="productos">
+        <!-- acá se listan los productos -->
+        <p class = "item-producto">Sin Productos.</p>
+      </div>
+    </div>
+    `;
+
+    return cad
 
 }
 
@@ -23,6 +35,9 @@ function htmlItemProducto(id, imagen, nombre, precio){
      *   
     */
     
+    let cad =
+    `copiar codigo
+    `
 
 
 }
@@ -33,8 +48,10 @@ async function asignarProducto(id){
     /*3- EN EL INTERIOR DEL BUCLE DEBERA LLAMAR A LA FUNCION htmlItemProducto y acumular su resultado en una cadena de caracteres */
     /*4- LUEGO DEL BUCLE Y CON LA CADENA RESULTANTE SE DEBE CAPTURAR EL ELEMENTO DEL DOM PARA ASIGNAR ESTOS PRODUCTOS DENTRO DE LA CATEGORIA CORRESPONDIENTE */
     /*5- PARA ELLO PODEMOS HACER USO DE UN SELECTOR CSS QUE SELECCIONE EL ATRIBUTO data-idCategoria=X, Ó LA CLASE .productos  .SIENDO X EL VALOR LA CATEGORIA EN CUESTION.*/ 
-     
-     
+    let d = document;
+    let cad ="";
+    let resProd = await productosServices.listarPorCategoria(id);
+     // resProd.forEach(producto => {
         
 
 } 
@@ -47,6 +64,16 @@ export async function listarProductos(){
      /* 5- LUEGO DEBERÁ LLAMAR UNA FUNCION, asignarProducto, QUE RECIBA COMO PARAMETRO EL ID DE LA CATEGORIA  */
      /* 6- FIN DEL BUCLE Y FIN DE LA FUNCION */   
 
-     
+  let d = document;
+  let resCat;
+  let listaProductos = d.querySelector("seccionProductos");
+
+  listaProductos.innerHTML("")
+  resCat = await categoriasServices.listar();
+
+  resCat.forEach(element => {
+    listaProductos.innerHtml += htmlCategoria(element.id, element.descripcion);
+    asignarProducto(element.id);
+  });
 }  
 
