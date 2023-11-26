@@ -95,7 +95,7 @@ function registrarCompra(){
     let idUsuario = session.idUsuario
     let emailUsuario = session.email;
     let nameProducto = document.getElementById("nameProducto");
-    let idProducto = nameProducto.getAttribute("data-...")
+    let idProducto = nameProducto.getAttribute("data-idproducto")
     const fecha = new Date();
     ventasServices.crear(idUsuario,idProducto,nameProducto.textContent,emailUsuario,cantidad,fecha,0);
     location.replace("tienda.html");
