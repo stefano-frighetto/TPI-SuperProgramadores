@@ -2,41 +2,30 @@
 import { usuariosServices } from "../../../servicios/usuarios-servicios.js";
 
 /**1- Se debe asignar a la siguiente constante todo el código correspondiente al componente de login (/asset/modulos/login.html)  */
-const htmlLogin=
-`
+const htmlLogin = `
 <div class="contenedorLogin">
     <div class="cajaLogin">
-        <p >Iniciar sesión</p>
+        <p>Iniciar sesión</p>
 
-        <form  class="formLogin" >
-
+        <form class="formLogin">
             <div class="input-group">
-                
                 <input type="email" class="form-control" id="loginEmail" placeholder="Email" name="loginEmail" autocomplete required>
-                
             </div>
 
             <div class="input-group">
-                
                 <input type="password" class="form-control" id="loginPassword" placeholder="Password" name="loginPassword" autocomplete required>
-            
             </div>
 
             <div class="input-group">
-                
-                <input type="password" class="form-control" id="reLoginPassword" placeholder="Repetir Password" name="reLoginPassword"  required>
-            
+                <input type="password" class="form-control" id="reLoginPassword" placeholder="Repetir Password" name="reLoginPassword" required>
             </div>
-                        
+            
             <div class="row">
-                                
                 <div class="col-4">
-                <button type="submit"  id="iniciar-sesion" class="btnAmarillo">Login</button>
+                    <button type="submit" id="iniciar-sesion" class="btnAmarillo">Login</button>
                 </div>
-                    
             </div>
         </form>
-            
     </div>
 </div>
 `;
@@ -50,29 +39,28 @@ var inputRepetirPass;
 
 
 
-export async function login(){
+export async function login() {
     /** 3- Esta función se encarga de llamar a la función crearFormulario y de enlazar el evento submit del formulario de login
      * 
     */
-   crearFormulario(false);
-   //await
-   formulario.addEventListener("submit", ingresar);    
-}  
+    crearFormulario(false);
+    formulario.addEventListener("submit", ingresar);
+}
 
-export async function register(){
+export async function register() {
      /** 4- Esta función se encarga de llamar a la función crearFormulario y de enlazar el evento submit del formulario de registro.
       *     Esta función es similar a la de login, pero en el llamado a la función crearFormulario lo hace pasando el valor true al 
       *     al parámetro registro que espera función mencionada.
       *     Por último enlaza el evento submit del formulario a la función registrarUsuario.
      * 
     */
-  crearFormulario(true);
-  formulario.addEventListener("submit", registrarUsuario);
+     crearFormulario(true);
+     formulario.addEventListener("submit", registrarUsuario);
 }  
 
 
 
-function crearFormulario(registrar){
+function crearFormulario(registrar) {
     /**
      * 1- Esta función deberá capturar el elemento cuya clase es .carrusel y le asignará en su interior un blanco para eliminar su contenido previo.
      * 2- Deberá realizar lo mismo para la clase .seccionProductos y .vistaProducto.
@@ -89,26 +77,26 @@ function crearFormulario(registrar){
     carrusel.innerHTML = "";
     let seccionProductos = document.querySelector(".seccionProductos");
     seccionProductos.innerHTML = "";
-    let vistaProducto = document.querySelector(".vistaProductos");
+    let vistaProducto = document.querySelector(".vistaProducto");
     vistaProducto.innerHTML = "";
     let seccionLogin = document.querySelector(".seccionLogin");
+
     seccionLogin.innerHTML = htmlLogin;
     inputEmail = document.getElementById("loginEmail");
     inputPassword = document.getElementById("loginPassword");
     inputRepetirPass = document.getElementById("reLoginPassword");
 
-    if(!registrar){
-      inputRepetirPass.outerHTML = ""
+    if (!registrar) {
+        inputRepetirPass.style.display = "none";
     } else {
-      inputRepetirPass.style.display = "block";
-      document.querySelector(".cajaLogin p").innerHTML = "Registrar usuario"
+        inputRepetirPass.style.display = "block";
+        document.querySelector(".cajaLogin p").textContent = "Registrar usuario";
     }
 
-    formulario = seccionLogin.querySelector(".formLogin")
-    
-} 
+    formulario = seccionLogin.querySelector(".formLogin");
+}
 
-async function  ingresar(e){
+async function ingresar(e) {
     /**
      * 1- Esta función tiene como objetivo controlar que el texto en inputEmail e inputPassword se corresponda con alguna cuenta almacenada
      *    en el REST-API.
@@ -125,17 +113,17 @@ async function  ingresar(e){
    
     e.preventDefault();
     let idUsuario = await usuarioExiste();
-    
+
     if (idUsuario) {
-      setUsuarioAutenticado(true, idUsuario);
-      mostrarUsuario(inputEmail.value);
-      window.location.href = "#"      
+        setUsuarioAutenticado(true, idUsuario);
+        mostrarUsuario(inputEmail.value);
+        window.location.href = "#";
     } else {
-      mostrarMensaje("Email o contraseña incorrectos. Intenta nuevamente.")
+        mostrarMensaje("Email o contraseña incorrectos. Intenta nuevamente.");
     }
 }
 
-async function  registrarUsuario(e){
+async function registrarUsuario(e) {
     /**
      * 1- Esta función tiene como objetivo controlar que el texto en inputPassword sea exactamente igual al texto ingresado en
      *    inputRepetirPass y luego registrar la cuenta en el REST-API.
@@ -148,14 +136,13 @@ async function  registrarUsuario(e){
      * 5- En caso negativo o falso mostrará una alerta indicando que las contraseñas ingresadas no son iguales.  
      */
     e.preventDefault();
-    if(inputPassword === inputRepetirPass){
-      await usuariosServices.crear(null, null, inputEmail.value, inputPassword.value);
-      mostrarMensaje("Email registrado");
-      window.location.href = "#login";
+    if (inputPassword.value === inputRepetirPass.value) {
+        await usuariosServices.crear(null, null, inputEmail.value, inputPassword.value);
+        mostrarMensaje("Email registrado");
+        window.location.href = "#login";
     } else {
-      mostrarMensaje("Las contraseñas no son iguales");
-    }   
-    
+        mostrarMensaje("Las contraseñas no son iguales");
+    }
 }
 async function usuarioExiste() {
     /**
@@ -225,20 +212,17 @@ async function usuarioExiste() {
     //   }
 }
 
-export function mostrarUsuario(email){
+export function mostrarUsuario(email) {
     /**
      * 1- Esta función deberá capturar del dom la clase .btnLogin y asignarle el texto existente en el parámetro email.
      * 2- Deberá capturar del dom la clase .btnRegister y asignarle el texto "Logout" y a este elemento asignarle el valor
      *    "#logout" sobre el atributo href.
      **/
-
     let btnLogin = document.querySelector(".btnLogin");
     btnLogin.textContent = email;
     let btnRegister = document.querySelector(".btnRegister");
     btnRegister.textContent = "logout";
     btnRegister.setAttribute("href", "#logout");
-    
-
 }
 
 function mostrarMensaje(msj) {
@@ -254,16 +238,11 @@ export function setUsuarioAutenticado(booleano, idUsuario) {
      * 2- Los valores de los mismos serán tomados de los dos parámetros recibidos y el email será tomado desde la variable
      *    inputEmail.
      */
-    
-  let email = ""
-  if (inputEmail){
-    email = inputEmail.value
-  }
-  sessionStorage.setItem('autenticado', booleano);
-  sessionStorage.setItem('idUsuario', idUsuario);
-  sessionStorage.setItem('email', email);
-
+    sessionStorage.setItem('autenticado', booleano);
+    sessionStorage.setItem('idUsuario', idUsuario);
+    sessionStorage.setItem('email', inputEmail.value);
 }
+
 export function getUsuarioAutenticado() {
     /**
      * 1- Esta función debera leer los valores almacenados en el sessionStorage y construir un objeto con los valores
@@ -271,7 +250,7 @@ export function getUsuarioAutenticado() {
      * 2- Luego los devolverá como resultado.
      */
     
-    var session = new Object();
+    var session = {};
     session.autenticado = sessionStorage.getItem('autenticado') === "true";
     session.idUsuario = sessionStorage.getItem('idUsuario');
     session.inputEmail = sessionStorage.getItem('email');
