@@ -35,9 +35,21 @@ function htmlItemProducto(id, imagen, nombre, precio){
      *   
     */
     
-    let cad =
-    `copiar codigo
+    let cad=
     `
+    <div class="item-producto">
+
+      <img src="${imagen}" >
+      <p class="producto_nombre" name="motorola">${nombre}</p>
+      <p class="producto_precio">${precio}</p>
+
+      <a href="?idProducto=${id}#vistaProducto" type="button" class="producto_enlace" >Ver producto</a>
+
+    </div>
+    `;
+    return cad
+
+
 
 
 }
@@ -51,8 +63,11 @@ async function asignarProducto(id){
     let d = document;
     let cad ="";
     let resProd = await productosServices.listarPorCategoria(id);
-     // resProd.forEach(producto => {
-        
+    resProd.forEach(producto => {
+      cad+=htmlItemProducto(producto.id,producto.foto,producto.precio,producto.nombre)
+      let itemProducto=document.querySelector("DATA...ID")
+      itemProducto.innerHTML=cad;
+    })
 
 } 
 export async function listarProductos(){

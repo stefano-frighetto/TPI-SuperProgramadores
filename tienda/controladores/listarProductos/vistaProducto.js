@@ -13,27 +13,48 @@ export async function vistaProducto(){
      * 6-El resultado de la función deberá asignarse al elemento .vistaProducto capturado previamente.
      * 7-Se deberá capturar el elemento html correspondiente al anchor btnComprar y enlazar el evento click a la función registrarCompra.  
     */
-   let d = document;
-   let res;
-   let carrusel = d.querySelector(".carrusel");
-   let seccionProductos = d.querySelector(".seccionProductos");
-   let vistaProducto = d.querySelector(".vistaProducto");
-   carrusel.innerHTML = "";
-   let seccionLogin = d.querySelector("seccionLogin");
-   seccionLogin.innerHTML("");
+    let d = document;
+    let res;
+    let carrusel = d.querySelector(".carrusel");
+    let seccionProductos = d.querySelector(".seccionProductos");
+    let vistaProducto = d.querySelector(".vistaProducto");
+    carrusel.innerHTML = "";
+    let seccionLogin = d.querySelector(".seccionLogin");
+    seccionLogin.innerHTML("");
+    seccionProductos.innerHTML="";
+    let idProducto=leerParametro();
+ 
+    res=await productosServices.listar(idProducto);
+    vistaProducto.innerHTML= htmlVistaProducto(res.id,res.nombre,res.descripcion,res.precio)
+    let btnComprar=document.getElementById("btnComprar")
+    btnComprar.addEventListener("click",registrarCompra);
+    
 }
 
 function htmlVistaProducto(id, nombre, descripcion, precio, imagen) {
-    /**1- ESTA FUNCION RECIBE COMO PARAMETRO los siguiente datos id, nombre, descripcion, precio e imagen del producto */
-    /**2- A ESTOS PARAMETROS LOS CONCATENA DENTRO DEL CODIGO CORRESPONDIENTE AL COMPONENTE vistaProducto ( ASSETS/MODULOS/vistaProducto.html)*/
-    /**3- POR ULTIMO DEVUELVE LA CADENA RESULTANTE. */
-    /**4- SE RECUERDA QUE PARA PODER HACER LA INTERPOLACION DE CADENAS ${NOMBRE_VARIABLE} EL TEXTO DEBE ESTAR ENTRE LAS COMILLAS ` `. 
-     *  
-     *  ejemplo
-     *   let titulo = 'Señora';  
-     *   let cadena = `Hola, ${titulo} Claudia  en que podemos ayudarla`;
-     *   
-    */
+    let cad =
+    `
+    <div class="imagen">
+        <img src="${imagen}" alt="producto">
+    </div>
+    <div class="texto">
+        <p id="nameProducto" data-idProducto=${id}>${nombre}</p>
+
+        <p id="descripcionProducto">${descripcion}</p>
+
+        <p id="precioProducto">${precio}</p>
+
+        <div class="form-group">
+            <label for="cantidadProducto">Cantidad</label>
+            <input type="number" step="1" min ="1" value="1" id="cantidadProducto">
+        </div>
+
+        <a id="btnComprar" >Comprar</a>
+    </div>
+    `;
+
+    return cad
+
     
 }
 function leerParametro(){
@@ -70,11 +91,13 @@ function registrarCompra(){
       alert("Antes de comprar debe iniciar sesión")
       return;
     }
-    let cantidad = document.getElementById("cantidadProducto").ariaValueMax;
+    let cantidad = document.getElementById("cantidadProducto").value;
     let idUsuario = session.idUsuario
     let emailUsuario = session.email;
     let nameProducto = document.getElementById("nameProducto");
     let idProducto = nameProducto.getAttribute("data-...")
     const fecha = new Date();
-    // ...
+    ventasServices.crear(idUsuario,idProducto,nameProducto.textContent,emailUsuario,cantidad,fecha,0);
+    location.replace("tienda.html");
+    alert('compra realizada');
 }

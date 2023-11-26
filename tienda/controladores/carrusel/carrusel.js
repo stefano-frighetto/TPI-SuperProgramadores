@@ -4,7 +4,7 @@ const htmlCarrusel =
 <div class="conteCarrousel">
     <div class="itemCarrousel" id="itemCarrousel-1">
         <div class="itemCarrouselTarjeta">
-            <img src="/img/slider/imagen1.png" alt="">
+            <img src="/img/slider/car1.jpeg" alt="">
         </div>
         <div class="itemCarrouselArrows">
             <a href="#itemCarrousel-3">
@@ -17,7 +17,7 @@ const htmlCarrusel =
     </div>
     <div class="itemCarrousel" id="itemCarrousel-2">
         <div class="itemCarrouselTarjeta">
-            <img src="/img/slider/imagen2.png" alt="">
+            <img src="/img/slider/car2.jpeg" alt="">
         </div>
         <div class="itemCarrouselArrows">
             <a href="#itemCarrousel-1">
@@ -30,7 +30,7 @@ const htmlCarrusel =
     </div>
     <div class="itemCarrousel" id="itemCarrousel-3">
         <div class="itemCarrouselTarjeta">
-            <img src="/img/slider/imagen3.png" alt="">
+            <img src="/img/slider/car3.jpeg" alt="">
         </div>
         <div class="itemCarrouselArrows">
             <a href="#itemCarrousel-2">
