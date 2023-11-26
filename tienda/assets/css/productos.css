@@ -1,19 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+.seccionProductos{
+    
+    background-color:rgb(27, 27, 97);
+    
+}
 .categorias h1 {
     font-family: "Merriweather";
     font-weight: 800;
     font-size: 3rem;
-    padding: 2rem;
-    margin: 1rem 0 ;
+    
+    margin: 0px;
+    padding: 0px;
+    min-height: 10vh;
+    padding: 2.5rem;
+    padding-left: 6rem;
+    box-shadow: 1px 1px 10px black;
+    
+}   
 
+.categoria{
+    margin-top: 50px;
+    padding-top: 5px;
+    padding-left:20px;
+    background-color: brown;
+    color: azure;
 }
+
+
 
 .productos{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 0 1rem;
+    padding:  4rem;
 }
 
 .item-producto{

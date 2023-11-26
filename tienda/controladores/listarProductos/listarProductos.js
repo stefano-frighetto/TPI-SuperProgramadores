@@ -51,7 +51,6 @@ function htmlItemProducto(id, imagen, nombre, precio){
 
 
 
-
 }
 
 async function asignarProducto(id){
@@ -65,7 +64,7 @@ async function asignarProducto(id){
     let resProd = await productosServices.listarPorCategoria(id);
     resProd.forEach(producto => {
       cad+=htmlItemProducto(producto.id,producto.foto,producto.precio,producto.nombre)
-      let itemProducto=document.querySelector("DATA...ID")
+      let itemProducto=document.querySelector("[data-idCategoria="+id+"].producto")
       itemProducto.innerHTML=cad;
     })
 

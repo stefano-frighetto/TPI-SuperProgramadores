@@ -22,6 +22,8 @@ header{
     padding: 1rem;
     box-shadow: 1px 1px 10px ;
 }
+
+
 header img{
     padding: 1rem;
     object-fit:contain;
@@ -29,7 +31,7 @@ header img{
 a{
     text-decoration: none;
     font-weight:bold;
-    color: black;
+    color: rgb(15, 15, 119);
 }
 
 .login{
@@ -38,8 +40,24 @@ a{
    
     
 }
+.contenedorLogin {
+    background-image: url('/img/plantilla/4824751.jpg');
+    background-size: cover;
+    
+}
+.cajaLogin{
+   
+    background-color:whitesmoke;
+    box-shadow: 1px 1px 10px black;
+    font-weight: bold;
+   
+    
+}
+
+
 .login div:first-child {
     font-size:x-large;
+   
 }    
 
 
@@ -58,3 +76,13 @@ footer{
     border-top: 1px solid rgba(128, 128, 128, 0.5);
 }
 
+.carrousel{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+
+}
+.itemCarrousel{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+
+}
